@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Loading...</title>
+  <meta property="og:image" content="https://d3v.pages.dev/og.png" />
+  <meta charset="utf-8"> <meta content="width=device-width, initial-scale=1.0" name="viewport">
+</head>
+<body>
+  <div id="profile">
+    <h1>Loading...</h1>
+  </div>
+
+  <script>
+    let userData; // Declare a global variable
+
+    // Function to update the HTML with the retrieved data
+    const updateProfileData = () => {
+      // Update the HTML with the retrieved data
+      document.getElementById('profile').innerHTML = `
+
+
+
+        <div class="img">
+      <img src="${userData.avatar_url}">
+    </div>
+    <div class="infos">
+      <div class="name">
+        <h2>${userData.name}</h2>
+        <h4>@${userData.login}</h4>
+      </div>
+      <p class="text">
+        ${userData.bio}
+      </p>
+      <ul class="stats">
+        <li>
+          <h3>${userData.public_repos}</h3>
+          <h4>Repos</h4>
+        </li>
+        <li>
+          <h3>${userData.followers}</h3>
+          <h4>Followers</h4>
+        </li>
+        <li>
+          <h3>${userData.following}</h3>
+          <h4>Following</h4>
+        </li>
+      </ul>
+      <div class="links">
+        <a href="https://instagram.com/_slyro"><button class="follow">Say Hi</button></a>
+        <a href="${userData.html_url}"><button class="view">View profile</button></a>
+      </div>
+    </div>
+      `;
+
+      // Use the userData variable in subsequent code
+      console.log(userData);
+
+      // Call other functions or perform additional actions with userData
+      // ...
+    };
+
+    // Fetch the data from the API
+    fetch('https://api.github.com/users/khandelwaldev')
+      .then(response => response.json())
+      .then(data => {
+        // Assign the fetched data to the global variable
+        userData = data;
+
+        // Update the page title
+        document.title = userData.name;
+
+        // Call the function to update the HTML and use the userData variable
+        updateProfileData();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('profile').innerHTML = '<h1>Failed to fetch user profile</h1>';
+      });
+  </script>
+</body>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  align-items: center;
+  justify-content: center;
+  background-color: #ADE5F9;
+  min-height: 100vh;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+ul {
+  list-style: none;
+}
+
+/* Utilities */
+#profile::after,
+#profile img {
+  border-radius: 50%;
+}
+body,
+#profile,
+.stats {
+  display: flex;
+}
+
+#profile {
+  padding: 2.5rem 2rem;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, .5);
+  max-width: 500px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, .15);
+  margin: 1rem;
+  position: relative;
+  transform-style: preserve-3d;
+  overflow: hidden;
+}
+#profile::before,
+#profile::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+}
+#profile::before {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #FFF;
+  border-radius: 10px;
+  top: -.7rem;
+  left: -.7rem;
+}
+#profile::after {
+  height: 15rem;
+  width: 15rem;
+  background-color: #4172f5aa;
+  top: -8rem;
+  right: -8rem;
+  box-shadow: 2rem 6rem 0 -3rem #FFF
+}
+
+#profile img {
+  width: 8rem;
+  min-width: 80px;
+  box-shadow: 0 0 0 5px #FFF;
+}
+
+.infos {
+  margin-left: 1.5rem;
+}
+
+.name {
+  margin-bottom: 1rem;
+}
+.name h2 {
+  font-size: 1.3rem;
+}
+.name h4 {
+  font-size: .8rem;
+  color: #333
+}
+
+.text {
+  font-size: .9rem;
+  margin-bottom: 1rem;
+}
+
+.stats {
+  margin-bottom: 1rem;
+}
+.stats li {
+  min-width: 5rem;
+}
+.stats li h3 {
+  font-size: .99rem;
+}
+.stats li h4 {
+  font-size: .75rem;
+}
+
+.links button {
+  font-family: 'Poppins', sans-serif;
+  min-width: 120px;
+  padding: .5rem;
+  border: 1px solid #222;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all .25s linear;
+}
+.links .follow,
+.links .view:hover {
+  background-color: #222;
+  color: #FFF;
+}
+.links .view,
+.links .follow:hover{
+  background-color: transparent;
+  color: #222;
+}
+
+@media screen and (max-width: 450px) {
+  #profile {
+    display: block;
+  }
+  .infos {
+    margin-left: 0;
+    margin-top: 1.5rem;
+  }
+  .links button {
+    min-width: 100px;
+  }
+}
+</style>
+</html>
