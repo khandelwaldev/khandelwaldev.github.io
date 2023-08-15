@@ -1,0 +1,42 @@
+---
+title: 'How to Track Someone’s IP Address on Omegle by Using Javascript'
+date: '23-08-07'
+description: 'First of all you need to go to https://omegle.com and then on the homepage right click and click inspect element as shown below...'
+banner: '/img/omegle/omegle.jpg'
+author: 'Dev Khandelwal'
+tags: 'hacking, javascript, omegle'
+id: 'how-to-track-someones-ip-address-on-omegle-by-using-javascript'
+---
+
+First of all you need to go to `https://omegle.com` and then on the homepage right click and click inspect element as shown below
+
+![image-1](/img/omegle/omegle.jpg)
+
+And after that go to the `console` area and copy paste the below `javascript` code inside the console and press enter
+
+```
+window.oRTCPeerConnection  = window.oRTCPeerConnection || window.RTCPeerConnection
+window.RTCPeerConnection = function(...args) {
+ const pc = new window.oRTCPeerConnection(...args)
+pc.oaddIceCandidate = pc.addIceCandidate
+pc.addIceCandidate = function(iceCandidate, ...rest) {
+ const fields = iceCandidate.candidate.split(' ')
+if (fields[7] === 'srflx') {
+console.log('IP Address:', fields[4])
+}
+return pc.oaddIceCandidate(iceCandidate, ...rest)
+}
+return pc
+}
+```
+
+![image-2](/img/omegle/omegle2.jpg)
+
+And now again clear out the console and then click the `video chat` button on omegle ( this method is only work in Video Chat )
+
+![image-3](/img/omegle/omegle3.jpg)
+
+Now you can see the `ip addresses` appearing inside the console just copy it inside a online tool of `ip address` location finder and you will see the below result.
+
+![image-4](/img/omegle/omegle4.jpg)
+
