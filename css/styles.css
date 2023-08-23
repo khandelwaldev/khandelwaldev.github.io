@@ -84,6 +84,7 @@ body {
   font-family: "Syne", sans-serif;
   font-weight: 400;
   overflow-x: hidden !important;
+  cursor: none;
 }
 
 body.bg-dots {
