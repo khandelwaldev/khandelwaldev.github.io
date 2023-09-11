@@ -873,8 +873,15 @@
   </script>
 
   <script>
-    console.log("Hello there")
-  </script>
+  // Function to clear the console and then display the message
+  function clearConsoleAndDisplayMessage() {
+    console.clear(); // Clear the console
+    console.log("Hello there, I'm Dev"); // Display the message
+  }
+
+  // Call the function when the page loads
+  window.onload = clearConsoleAndDisplayMessage;
+</script>
 
 </body>
 
