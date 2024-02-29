@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #container {
+      text-align: center;
+    }
+
+    button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 4px 2px;
+  cursor: pointer;
+    }
+    #yesBtn {
+      background-color: #04AA6D;
+    }
+    #noBtn {
+      background-color: #f44336;
+    }
+  </style>
+  <script>
+    let clickCount = 0;
+
+    const noBtnTexts = [
+      "Sure?",
+      "Are you sure?",
+      "Really Sure?",
+      "Are you Really Really sure",
+      "Just Think About it",
+      "Give at least two minutes of thoughts",
+      "Are you Positive?",
+      "If you say no, I'll be very sad",
+      "I'll be very very sad",
+      "I'll be very very very sad",
+      "Fine, I'll stop now",
+      "Just Kidding last Chance",
+      "Please say yes",
+      "Pretty please?",
+      "I'll give you a hug"
+    ];
+
+    function handleClick() {
+      clickCount++;
+
+      if (clickCount <= noBtnTexts.length) {
+        document.getElementById("noBtn").innerHTML = noBtnTexts[clickCount - 1];
+      } else {
+        alert("Congratulations! You've got a full-screen date with [Your Girlfriend's Name]!");
+        // Redirect to a page with details about the date or any further interaction
+      }
+
+      if (clickCount < noBtnTexts.length) {
+        document.getElementById("yesBtn").style.fontSize = `${1 + 0.5 * clickCount}em`;
+      } else {
+document.getElementById("yesBtn").style.position = "fixed";
+        document.getElementById("yesBtn").style.top = "0";
+        document.getElementById("yesBtn").style.bottom = "0";
+document.getElementById("yesBtn").style.left = "0";
+document.getElementById("yesBtn").style.right = "0";
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <img src="https://media.tenor.com/btTaqabFAFIAAAAj/white-bear.gif" width="180" height="auto" />
+    <h1>Hey,</h1>
+    <p>Can you give me your phone number?</p>
+    <button id="yesBtn" onclick="myFunction()">Yes</button>
+    <button id="noBtn" onclick="handleClick()">No</button>
+  </div>
+
+  <script>
+    function myFunction() {
+      location.replace("https://d3v.pages.dev/try/thanks")
+    }
+    </script>
+</body>
+</html>
